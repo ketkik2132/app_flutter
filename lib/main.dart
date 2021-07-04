@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:mongo_dart/mongo_dart.dart' show Db, GridFS;
-import 'package:path_provider/path_provider.dart';
+
 
 void main() => runApp(MyApp());
 
@@ -70,12 +70,7 @@ class _MyHomePageState extends State<MyHomePage> with SingleTickerProviderStateM
       var compressedImage;
       var _cmpressed_image;
       try {
-        final tempDir = await getTemporaryDirectory();
-        final path = tempDir.path;
-        int rand = new Math.Random().nextInt(10000);
-        Im.Image image = Im.decodeImage(_image.readAsBytesSync());
-        Im.Image smallerImage = Im.copyResize(image,width:500);
-        compressedImage = new File('$path/img_$rand.jpg')..writeAsBytesSync(Im.encodeJpg(image, quality: 85));
+
 
       } catch (e) {
 
@@ -120,6 +115,10 @@ class _MyHomePageState extends State<MyHomePage> with SingleTickerProviderStateM
                     height: 20,
                   ),
                   provider == null ? Text('No image selected.') : Image(image: provider,),
+                  Container(
+                    color: Colors.yellow,
+                    height: 20,
+                  ),
                   SizedBox(height: 10,),
                   if(flag==true)
                     CircularProgressIndicator(valueColor: _colorTween),
